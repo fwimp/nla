@@ -1,16 +1,17 @@
 Package: nla
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Non-Linear Averaging Tools
 Version: 0.1.0
-Authors@R: c(
-    person(
-      "Jane", "Doe",
-      email = "jane@example.com",
-      role = c("aut", "cre")
-    )
-  )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
-License: What license is it under?
+Authors@R: 
+    person("Francis", "Windram", , "francis.windram17@imperial.ac.uk", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-2129-826X"))
+Description: Perform non-linear averaging over time in a fast and repeatable manner.
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/fwimp/nla, https://fwimp.github.io/nla/
+BugReports: https://github.com/fwimp/nla/issues
+RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE)
+Depends: 
+    R (>= 4.1.0)
