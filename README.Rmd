@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# nla
+# nla <a href="https://fwimp.github.io/nla/"><img src="man/figures/logo.svg" align="right" width="120" alt="nla website" /></a>
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/fwimp/nla/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/fwimp/nla/actions/workflows/R-CMD-check.yaml)

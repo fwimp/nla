@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# nla
+# nla <a href="https://fwimp.github.io/nla/"><img src="man/figures/logo.svg" align="right" width="120" alt="nla website" /></a>
 
 <!-- badges: start -->
 
