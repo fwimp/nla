@@ -1,0 +1,27 @@
+# nla
+
+NLA provides a simple set of functions to aid in performing non-linear
+averaging.
+
+$$\overline{f(X)} \neq f\left( \overline{X} \right)$$
+
+## Installation
+
+You can install the development version of `nla` from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("pak")
+pak::pak("fwimp/nla")
+```
+
+# Package index
+
+## All functions
+
+- [`hello()`](https://fwimp.github.io/nla/reference/hello.md) : Hello,
+  World!
+- [`nla_tpc_empirical()`](https://fwimp.github.io/nla/reference/nla_tpc_empirical.md)
+  : Perform nonlinear averaging of a temperature-dependent variable
+  across a range of temperatures from empirically-derived data
+
