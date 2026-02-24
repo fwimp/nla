@@ -79,3 +79,5 @@ nla_tpc_empirical <- function(tpcs, dailytemps, tempaxis) {
 
 	return(final_out)
 }
+
+
