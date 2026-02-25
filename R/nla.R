@@ -23,6 +23,7 @@
 #' @examplesIf interactive()
 #' nla_tpc_empirical()
 nla_tpc_empirical <- function(tpcs, dailytemps, tempaxis = NULL) {
+	# TODO: Add more input format checking.
 	# Check input formats
 	if(!inherits(tpcs, "matrix")) {
 		warning("tpcs is not a matrix")
@@ -49,7 +50,6 @@ nla_tpc_empirical <- function(tpcs, dailytemps, tempaxis = NULL) {
 	# Also width of tpcs must be the same length as tempaxis
 	if (is.null(tempaxis)) {
 		if (!is.null(colnames(tpcs))) {
-			warning("tempaxis not provided, inferred from tpcs column names")
 			tempaxis <- as.numeric(colnames(tpcs))
 		} else {
 			stop("tempaxis not provided, and no column names on tpcs to infer from!")

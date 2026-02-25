@@ -15,3 +15,4 @@ A vector of the number of decimal places required to represent each float.
 \description{
 Find the decimal places in a vector of floats
 }
+\keyword{internal}

@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Francis Windram \email{francis.windram17@imperial.ac.uk} (\href{https://orcid.org/0000-0002-2129-826X}{ORCID}) [copyright holder]
 
+Authors:
+\itemize{
+  \item Marta Shocket \email{m.shocket@lancaster.ac.uk} (\href{https://orcid.org/0000-0002-8995-4446}{ORCID})
+}
+
 }
 \keyword{internal}

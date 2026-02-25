@@ -1,0 +1,192 @@
+---
+title: "Performing non-linear averaging on TPCs"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Performing non-linear averaging on TPCs}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+Non-linear averaging (aka rate summation) is predicated upon the concept that the average of a function is not the same as the function of the average.
+
+$$\overline{f(X)} \neq f(\overline{X})$$
+
+This is known as [Jensen's inequality](https://en.wikipedia.org/wiki/Jensen%27s_inequality), and is a powerful concept to aid in understanding results from the natural world.
+
+In thermal biology, Jensen's inequality rears its head when considering fluctuating temperatures.
+
+### Fluctuating temperatures
+
+If you wish to simply test the responses of an organism at a constant temperature, you can hold them at that temperature and measure their performance (e.g. growth rate).
+
+That said, temperatures in nature are rarely stationary over the scale of a day: midday is usually warmer than the dead of night due to radiant heating from the sun.
+
+Given this, when an organism is nominally at a daily temperature of 20°C, it is actually experiencing a range of temperatures around that value (say 10°C-30°C).
+
+According to Jensen's inequality, for a function $f(T)$ that defines trait performance, taking $f(\overline{T})$ is not the same as $\overline{f(X)}$. As such, researchers commonly use non-linear averaging (NLA) to calculate $\overline{f(X)}$ instead.
+
+## Averaging curves with functional forms
+
+The simplest scenario for averaging $f$ is when you have a function in r for $f$ (a good source for these functions is the [rTPC](https://padpadpadpad.github.io/rTPC/) package).
+
+When you have both the function $f$ and its associated parameterisation (e.g. from fitting the TPC to a set of data), computing $\overline{f(T)}$ is trivial.
+
+`nla` provides a method to do this at scale on a batch of tpcs at once, given a batch of daily temperature curves.
+
+For this example we are going to use the `rTPC::briere2_1999()` TPC function as our base TPC.
+
+### Parameterising the TPC
+
+Usually you would derive the parameters to be used in your TPC function from fitting the curve, however in this case we have not done that as we have no data.
+
+`rTPC::briere2_1999()` has 5 parameters, none of which have default values:
+
+```{r}
+formals(rTPC::briere2_1999)
+```
+
+We will need to provide all of these parameters to the TPC in some way. This is done in `nla` by providing a _named list_ of parameters:
+
+```{r}
+param_list <- list(
+  "a" = c(0.01, 0.02),
+  "b" = 2,
+  "tmin" = 10,
+  "tmax" = 30,
+  "labels" = c("test", "test2")
+)
+```
+
+A few things to note here:
+
+- The `temp` parameter will be filled in by `nla`
+- All TPC parameters without defaults must be present in the parameter list.
+- Normal vector recycling rules apply, so each entry in the list must either be a vector of the same length, or a single value (which will be used for each TPC run).
+- The `labels` entry in the list allows your to label the output rows. This is not required but can be useful.
+
+### Generating the daily temperature curve
+
+Alongside the TPC, we also require a daily temperature curve (or set of curves) to define the fluctuating temperatures we wish to account for.
+
+`nla` provides a set of functions for generating these curves, which all start with `dt_`. For this example let's use a simple sine wave at various mean temperatures:
+
+```{r}
+library(nla)
+```
+
+
+```{r}
+dailytemps <- dt_sin(dtr = 5, tbar = seq(5,35, 2), sunrise = 6, resolution = 1, clamp = TRUE)
+dailytemps
+```
+
+```{r echo=FALSE, fig.height=6, fig.width=8}
+library(tibble)
+library(tidyr)
+library(ggplot2)
+dailytemps_plotting <- dt_sin(dtr = 5, tbar = seq(16,29), sunrise = 6, resolution = 1, clamp = FALSE) |> 
+	as.data.frame() |> 
+	rownames_to_column(var = "Time")
+dailytemps_plotting$Time <- as.integer(dailytemps_plotting$Time)
+dailytemps_plotting |> pivot_longer(cols = -c(Time), names_to = "MeanTemp", values_to = "Temp") |>
+	ggplot(aes(x = Time, y = Temp, colour = MeanTemp, group = MeanTemp)) + geom_line() + theme_bw()
+
+```
+
+_If you look closely you'll notice that the numbers don't quite match up here, this is because the above graph is generated with `clamp = FALSE` to show the full daily temperature curve._
+
+### Actually performing the averaging
+
+Finally, to actually perform the NLA, we will use the `nla_tpc_analytic()` function. This performs the NLA process for each timepoint in the tpc (as defined by the input temperatures, the columns in  `dailytemperatures`).
+
+```{r}
+tpcs_nla_analytic <- nla_tpc_analytic(rTPC::briere2_1999, param_list, dailytemps, minvalue = 0, default_value = 0)
+tpcs_nla_analytic
+```
+```{r echo=FALSE, fig.height=6, fig.width=8}
+plotting_tpcs_nla_analytic <- tpcs_nla_analytic |> 
+	as.data.frame() |> 
+	rownames_to_column(var = "TPC") |> 
+	pivot_longer(cols = -c(TPC), names_to = "Temp", values_to = "Performance")
+plotting_tpcs_nla_analytic$Temp <- as.numeric(plotting_tpcs_nla_analytic$Temp)
+	plotting_tpcs_nla_analytic |> ggplot(aes(x = Temp, y = Performance, colour = TPC, group = TPC)) + geom_line() + theme_bw()
+```
+
+## Averaging empirically-derived curves
+
+Performing NLA on empirically-derived thermal performance curves (curves of $f(T)$ against $T$) is an extra challenge, as you do not necessarily have a functional form of $f$.
+
+`nla` aims to help with this problem using the `nla_tpc_empirical()` function.
+
+### Generating our data
+
+Before we go through how to perform NLA on "empirical" data, let's generate some pseudo-data to work with.
+
+```{r}
+# Our test tpc function, you would not usually have this for empirical data
+test_tpcfunc <- function(temp, tmin, tmax, a) {
+	-1 * a * (temp - tmin) * (temp - tmax) * (tmax > temp) * (tmin < temp)
+}
+
+# Generate a sequence of temperatures and t_breadths
+tbar <- 16:29
+t_breadth <- 8:12 # Could make finer later
+
+fitlist <- lapply(t_breadth,
+	  \(tb, temp, tmean, a) {
+			test_tpcfunc(temp, tmean - (tb/2), tmean + (tb/2), a)
+	  	}, 
+	  temp = tbar,
+	  tmean = 22.5,
+	  a = 0.1)
+
+tpc_mat <- t(matrix(unlist(fitlist), ncol = length(t_breadth)))
+rownames(tpc_mat) <- t_breadth
+colnames(tpc_mat) <- tbar
+tpc_mat
+```
+
+This is a set of 5 TPCs between 15°C and 30°C.
+
+Of course, in reality you would probably have generated these data
+
+```{r echo=FALSE, fig.height=6, fig.width=8}
+tpc_mat |> 
+	as.data.frame() |> 
+	rownames_to_column(var = "DTR") |>
+	pivot_longer(cols = -c(DTR), names_to = "Temp", values_to = "Performance") |>
+	ggplot(aes(x = Temp, y = Performance, colour = DTR, group = DTR)) + geom_line() + theme_bw()
+```
+
+
+Let's generate a slightly different daily temperature matrix this time.
+
+```{r}
+dailytemps_2 <- dt_sin(dtr = 5, tbar = seq(16,29, 1), sunrise = 6, resolution = 1, clamp = TRUE)
+dailytemps_2
+```
+
+Finally we can apply NLA to the "empirical" data.
+
+```{r}
+tpcs_nla_empirical <- nla_tpc_empirical(tpc_mat, dailytemps_2)
+tpcs_nla_empirical
+```
+
+```{r echo=FALSE, fig.height=6, fig.width=8}
+tpcs_nla_empirical |> 
+	as.data.frame() |> 
+	rownames_to_column(var = "DTR") |>
+	pivot_longer(cols = -c(DTR), names_to = "Temp", values_to = "Performance") |>
+	ggplot(aes(x = Temp, y = Performance, colour = DTR, group = DTR)) + geom_line() + theme_bw()
+```
+

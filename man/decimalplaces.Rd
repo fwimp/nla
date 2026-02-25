@@ -15,3 +15,4 @@ The number of decimal places required to represent the float.
 \description{
 Find the decimal places in a float
 }
+\keyword{internal}

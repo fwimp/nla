@@ -3,6 +3,8 @@
 #' @param v A vector of floats.
 #'
 #' @returns A vector of the number of decimal places required to represent each float.
+#'
+#' @keywords internal
 find_dps <- function(v) {
 	sapply(v, decimalplaces)
 }
@@ -12,6 +14,8 @@ find_dps <- function(v) {
 #' @param x A float.
 #'
 #' @returns The number of decimal places required to represent the float.
+#'
+#' @keywords internal
 decimalplaces <- function(x) {
 	# Thanks to Gergely Daróczi on SO:
 	# https://stackoverflow.com/questions/5173692/how-to-return-number-of-decimal-places-in-r

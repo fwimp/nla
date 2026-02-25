@@ -2,9 +2,12 @@ Package: nla
 Type: Package
 Title: Non-Linear Averaging Tools
 Version: 0.1.0
-Authors@R: 
+Authors@R: c(
     person("Francis", "Windram", , "francis.windram17@imperial.ac.uk", role = c("aut", "cre", "cph"),
-           comment = c(ORCID = "0000-0002-2129-826X"))
+           comment = c(ORCID = "0000-0002-2129-826X")),
+    person("Marta", "Shocket", , "m.shocket@lancaster.ac.uk", role = "aut",
+           comment = c(ORCID = "0000-0002-8995-4446"))
+  )
 Description: Perform non-linear averaging over time in a fast and repeatable manner.
 License: GPL (>= 3)
 Encoding: UTF-8
@@ -16,9 +19,12 @@ Roxygen: list(markdown = TRUE)
 Depends: 
     R (>= 4.1.0)
 Suggests: 
+    ggplot2,
     knitr,
     rmarkdown,
     rTPC,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tibble,
+    tidyr
 Config/testthat/edition: 3
 VignetteBuilder: knitr
