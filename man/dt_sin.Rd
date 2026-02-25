@@ -22,6 +22,8 @@ dt_sin(
 
 \item{resolution}{The resolution of the time series in hours.}
 
+\item{tempdecimalprecision}{Decimal precision of the resultant temperature.}
+
 \item{clamp}{Whether to clamp the output between \code{min(tbar)} and \code{max(tbar)}, defaults to \code{TRUE}.}
 }
 \value{

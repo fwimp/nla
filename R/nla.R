@@ -112,7 +112,13 @@ nla_tpc_empirical <- function(tpcs, dailytemps, tempaxis = NULL) {
 #' "labels" = c("test", "test2")
 #' )
 #' test_dt <- dt_sin(dtr = 15, tbar = seq(20,45,0.1), sunrise = 6, resolution = 0.5, clamp = TRUE)
-#' nla_tpc_analytic(tpc_func = rTPC::briere2_1999, paramlist = test_param_list, dailytemps = test_dt, minvalue = 0, default_value = 0)
+#' nla_tpc_analytic(
+#' 	tpc_func = rTPC::briere2_1999,
+#' 	paramlist = test_param_list,
+#' 	dailytemps = test_dt,
+#' 	minvalue = 0,
+#' 	default_value = 0
+#' 	)
 #'
 
 nla_tpc_analytic <- function(tpc_func, paramlist, dailytemps, tempaxis_name = "temp", minvalue = NULL, maxvalue = NULL, default_value = NULL) {

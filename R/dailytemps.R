@@ -116,6 +116,7 @@ dt_modifiedlp <- function(dtr, tbar, resolution = 1, tempdecimalprecision = 1, c
 #' @param tbar A vector of target mean temperatures.
 #' @param sunrise The time that the sun rises.
 #' @param resolution The resolution of the time series in hours.
+#' @param tempdecimalprecision Decimal precision of the resultant temperature.
 #' @param clamp Whether to clamp the output between `min(tbar)` and `max(tbar)`, defaults to `TRUE`.
 #'
 #' @note If `length(tbar) == 1`, clamp is automatically set to `FALSE`.
@@ -157,6 +158,7 @@ dt_sin <- function(dtr, tbar, sunrise=6, resolution = 1, tempdecimalprecision = 
 #' @param tbar A vector of target mean temperatures.
 #' @param sunrise The time that the sun rises.
 #' @param resolution The resolution of the time series in hours.
+#' @param tempdecimalprecision Decimal precision of the resultant temperature.
 #' @param clamp Whether to clamp the output between `min(tbar)` and `max(tbar)`, defaults to `TRUE`.
 #'
 #' @note If `length(tbar) == 1`, clamp is automatically set to `FALSE`.
