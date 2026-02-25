@@ -16,3 +16,8 @@ Useful links:
 
 **Maintainer**: Francis Windram <francis.windram17@imperial.ac.uk>
 ([ORCID](https://orcid.org/0000-0002-2129-826X)) \[copyright holder\]
+
+Authors:
+
+- Marta Shocket <m.shocket@lancaster.ac.uk>
+  ([ORCID](https://orcid.org/0000-0002-8995-4446))

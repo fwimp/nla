@@ -1,6 +1,8 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://fwimp.github.io/nla/404.html</loc></url>
 <url><loc>https://fwimp.github.io/nla/LICENSE.html</loc></url>
+<url><loc>https://fwimp.github.io/nla/articles/index.html</loc></url>
+<url><loc>https://fwimp.github.io/nla/articles/nla_demo.html</loc></url>
 <url><loc>https://fwimp.github.io/nla/authors.html</loc></url>
 <url><loc>https://fwimp.github.io/nla/index.html</loc></url>
 <url><loc>https://fwimp.github.io/nla/reference/decimalplaces.html</loc></url>
