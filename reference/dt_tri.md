@@ -33,6 +33,10 @@ dt_tri(
 
   The resolution of the time series in hours.
 
+- tempdecimalprecision:
+
+  Decimal precision of the resultant temperature.
+
 - clamp:
 
   Whether to clamp the output between `min(tbar)` and `max(tbar)`,

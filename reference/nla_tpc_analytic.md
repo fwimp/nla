@@ -67,7 +67,13 @@ test_param_list <- list(
 "labels" = c("test", "test2")
 )
 test_dt <- dt_sin(dtr = 15, tbar = seq(20,45,0.1), sunrise = 6, resolution = 0.5, clamp = TRUE)
-nla_tpc_analytic(tpc_func = rTPC::briere2_1999, paramlist = test_param_list, dailytemps = test_dt, minvalue = 0, default_value = 0)
+nla_tpc_analytic(
+  tpc_func = rTPC::briere2_1999,
+  paramlist = test_param_list,
+  dailytemps = test_dt,
+  minvalue = 0,
+  default_value = 0
+  )
 #>              20      20.1      20.2      20.3      20.4      20.5      20.6
 #> test   7.084026  7.081722  7.077992  7.071788  7.065088  7.056767  7.047517
 #> test2 14.168053 14.163444 14.155983 14.143576 14.130177 14.113533 14.095033
