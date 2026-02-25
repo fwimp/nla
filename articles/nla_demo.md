@@ -32,8 +32,8 @@ value (say 10°C-30°C).
 
 According to Jensen’s inequality, for a function $f(T)$ that defines
 trait performance, taking $f\left( \overline{T} \right)$ is not the same
-as $\overline{f(X)}$. As such, researchers commonly use non-linear
-averaging (NLA) to calculate $\overline{f(X)}$ instead.
+as $\overline{f(T)}$. As such, researchers commonly use non-linear
+averaging (NLA) to calculate $\overline{f(T)}$ instead.
 
 ## Averaging curves with functional forms
 

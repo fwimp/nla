@@ -1,4 +1,4 @@
-# nla
+# Non-Linear Averaging (nla)
 
 NLA provides a simple set of functions to aid in performing non-linear
 averaging.
