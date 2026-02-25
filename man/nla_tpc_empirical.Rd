@@ -4,7 +4,7 @@
 \alias{nla_tpc_empirical}
 \title{Perform nonlinear averaging of a temperature-dependent variable across a range of temperatures from empirically-derived data}
 \usage{
-nla_tpc_empirical(tpcs, dailytemps, tempaxis)
+nla_tpc_empirical(tpcs, dailytemps, tempaxis = NULL)
 }
 \arguments{
 \item{tpcs}{A matrix of values measured across a temperature axis (represented in \code{tempaxis}).}
@@ -22,7 +22,7 @@ Perform nonlinear averaging of a temperature-dependent variable across a range o
 \note{
 The precision of \code{tempaxis} MUST be greater than or equal to the values of \code{dailytemps}.
 
-The width of the \code{tpcs} matrix MUST be the same length as tempaxis.
+The width of the \code{tpcs} matrix MUST be greater than or equal to the length of tempaxis.
 }
 \section{Input dimensionality}{
 
