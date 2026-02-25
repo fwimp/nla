@@ -6,7 +6,7 @@ range of temperatures from empirically-derived data
 ## Usage
 
 ``` r
-nla_tpc_empirical(tpcs, dailytemps, tempaxis)
+nla_tpc_empirical(tpcs, dailytemps, tempaxis = NULL)
 ```
 
 ## Arguments
@@ -35,7 +35,8 @@ are individual tpc runs.
 The precision of `tempaxis` MUST be greater than or equal to the values
 of `dailytemps`.
 
-The width of the `tpcs` matrix MUST be the same length as tempaxis.
+The width of the `tpcs` matrix MUST be greater than or equal to the
+length of tempaxis.
 
 ## Input dimensionality
 

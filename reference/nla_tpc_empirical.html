@@ -43,7 +43,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nla_tpc_empirical</span><span class="op">(</span><span class="va">tpcs</span>, <span class="va">dailytemps</span>, <span class="va">tempaxis</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nla_tpc_empirical</span><span class="op">(</span><span class="va">tpcs</span>, <span class="va">dailytemps</span>, tempaxis <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -69,7 +69,7 @@
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>The precision of <code>tempaxis</code> MUST be greater than or equal to the values of <code>dailytemps</code>.</p>
-<p>The width of the <code>tpcs</code> matrix MUST be the same length as tempaxis.</p>
+<p>The width of the <code>tpcs</code> matrix MUST be greater than or equal to the length of tempaxis.</p>
     </div>
     <div class="section level2">
     <h2 id="input-dimensionality">Input dimensionality<a class="anchor" aria-label="anchor" href="#input-dimensionality"></a></h2>
