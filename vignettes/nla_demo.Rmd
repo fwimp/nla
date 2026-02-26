@@ -186,7 +186,7 @@ tpcs_nla_empirical
 ```{r echo=FALSE, fig.height=6, fig.width=8}
 tpcs_nla_empirical_plotting <- tpcs_nla_empirical
 rownames(tpcs_nla_empirical_plotting) <- t_breadth
-tpcs_nla_empirical_plotting <- tpcs_nla_empirical |> 
+tpcs_nla_empirical_plotting <- tpcs_nla_empirical_plotting |> 
 	as.data.frame() |> 
 	rownames_to_column(var = "TBreadth") |>
 	pivot_longer(cols = -c(TBreadth), names_to = "Temp", values_to = "Performance")
