@@ -37,7 +37,7 @@ averaging (NLA) to calculate $\overline{f(T)}$ instead.
 
 ## Averaging curves with functional forms
 
-The simplest scenario for averaging $f$ is when you have a function in r
+The simplest scenario for averaging $f$ is when you have a function in R
 for $f$ (a good source for these functions is the
 [rTPC](https://padpadpadpad.github.io/rTPC/) package).
 
